@@ -3,7 +3,7 @@ export function autoCorrelate(buffer: Float32Array, sampleRate: number): number 
     let sumOfSquares = 0
 
     for(let i = 0; i < SIZE; i++){
-        sumOfSquares += buffer[i] * buffer[i]
+        sumOfSquares += buffer[i]! * buffer[i]!
     }
 
     const rootMeanSquare = Math.sqrt(sumOfSquares / SIZE)
@@ -14,12 +14,12 @@ export function autoCorrelate(buffer: Float32Array, sampleRate: number): number 
     const threshold = 0.2
 
     for(let i = 0; i < SIZE / 2; i++){
-        if(Math.abs(buffer[i]) < threshold){
+        if(Math.abs(buffer[i]!) < threshold){
             r1 = i; break;
         }
     }
     for(let i = 1; i < SIZE / 2; i++){
-        if(Math.abs(buffer[SIZE - i]) < threshold){
+        if(Math.abs(buffer[SIZE - i]!) < threshold){
             r2 = SIZE - i; break;
         }
     }
@@ -30,7 +30,7 @@ export function autoCorrelate(buffer: Float32Array, sampleRate: number): number 
 
     for(let i = 0; i < SIZE; i++){
         for(let j = 0; j < SIZE - i; j++){
-            c[i] = c[i] + buffer[j] * buffer[j + i]
+            c[i] = c[i] + buffer[j]! * buffer[j + i]!
         }
     }
 
